@@ -10,13 +10,13 @@ Features **potentially promised** on 1.0:
 - Fast and Asynchronous code and processing, SQL coding using HikariCP, Read more about HikariCP and their benchmarks [here](https://github.com/brettwooldridge/HikariCP).
 - Vault support, this plugin requires vault and won't function without it, you can download vault [here](https://www.spigotmc.org/resources/vault.34315/)
 - Multi-Currency Sign Support (you can have many currency signs, including $, £, ₺ and much more!)
-- simple, a drag and drop jar file,
+- simple, a drag and drop jar file, but if you don't want that, our plugin is also **AS CUSTOMIZABLE AS IT CAN BE!**
 - upto 9,223,372,036,854,775,807 dollars allowable! *(There's no way you need more than 10 trillion)*
 - No BStats or Metrics (there won't be for a while, but there could be in the future).
 - IT'S ALL FREE, which is the best part! 
 
-Upcoming features:
-- PlaceholderAPI support
+TODO **These are not promised on 1.0, they are promised on future versions.**:
+- [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) support
 - GUI Bank System
 - Support for many plugins (that require economy)
 - Support for per-world-support, and [WorldServer](https://www.spigotmc.org/resources/%E2%9C%85-worldserver-%E2%96%B6-per-world-chat-tab-and-eco.99010/) plugin.
