@@ -11,6 +11,7 @@ Features **potentially promised** on 1.0:
 - Vault support, this plugin requires vault and won't function without it, you can download vault [here](https://www.spigotmc.org/resources/vault.34315/)
 - Multi-Currency Sign Support (you can have many currency signs, including $, £, ₺ and much more!)
 - simple, a drag and drop jar file, but if you don't want that, our plugin is also **AS CUSTOMIZABLE AS IT CAN BE!**
+- UUID support, never worry about losing your whole economy progress from changing your name!
 - upto 9,223,372,036,854,775,807 dollars allowable! *(There's no way you need more than 10 trillion)*
 - No BStats or Metrics (there won't be for a while, but there could be in the future).
 - IT'S ALL FREE, which is the best part! 
