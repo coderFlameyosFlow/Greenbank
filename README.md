@@ -4,8 +4,8 @@ The newest economy plugin, loaded with green money!
 **Please NOTE: This plugin is in development, and is open for all possible contributions!**
 
 ### Requirements:
-- Vault
-- vilib
+- [Vault](https://www.spigotmc.org/resources/vault.34315/)
+- [vilib](https://github.com/Efnilite/vilib/)
 
 ## Features:
 - MySQL, SQLITE & JSON (JSON is optional, more like a future thing) databases.
