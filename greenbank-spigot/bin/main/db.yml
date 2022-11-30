@@ -1,0 +1,54 @@
+# The only avaliable options to
+# use as a database are MySQL and SQLite
+# If you need other databases, please feel free to make a feature request or PR to github.com
+#
+# Minimum database versions supported:
+#   - MySQL version v5.7
+#   - SQLite version v3.28
+#
+# Default used database is SQLite (due to it being a local database)
+# NOTE: SQLite and MySQL uses HikariCP to connect to databases asynchronously
+database-driver: "SQLite"
+
+# The default database host IP address
+database-host: "localhost"
+
+# Default port for MySQL is 3306
+database-port: 3306
+
+# The default database name
+database-name: "root"
+
+# The default database username
+database-username: "root"
+
+# The default database password
+#
+# Security NOTE:
+# Make sure this is VERY secure as if someone
+# already has the same password or has access to the database
+# they could be able to access the database using the password
+# stored in the database.
+database-password: "root"
+
+# Number of active connections to the SQL database at the same time.
+# This is the number of active connections to to the SQL database at once
+# Default is 10.
+database-max-connection-size: 10
+
+# Enables or disables SSL for databases such as MySQL and upcoming databases.
+# Default is false.
+database-use-ssl: false
+
+# Custom connection datasource properties that will be applied to connection pool.
+# Check available values to your SQL driver implementation.
+#
+# Example:
+#   cachePrepStmts: 'true'
+#   prepStmtCacheSize: '250'
+#   
+connection-datasource-properties: {
+  # Example:
+  #   cachePrepStmts: 'true'
+  #   prepStmtCacheSize: '250'
+}
