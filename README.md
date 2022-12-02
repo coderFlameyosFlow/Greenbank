@@ -32,6 +32,7 @@ TODO **These are not promised on 1.0, they are promised on future versions altho
 
 ## Contributing
 If you have an issue in Greenbank, please report via the Issues page
+
 Consider pull requesting any features and/or bug fixes! (It will save your time and so will my time be saved!)
 
 Before contributing, make sure to go to [my discord server](https://discord.gg/Zj6KBS7UwX) and contacting me or making a support forum channel! (with the contributions tag)
