@@ -32,8 +32,7 @@ If you want any more please make a feature list.
 
 
 # TODO Features:
-These are here because they were planned, but weren't made because they were hard to make.
-Usually made without notice ;)
+These are here because they were planned, but weren't made because they were hard to make, usually made without notice ;)
 
 ### Hooks:
 - **PlaceholderAPI** hook
