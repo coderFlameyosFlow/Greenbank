@@ -1,5 +1,10 @@
 # FEATURES:
 If you want any more please make a feature list.
+PLEASE NOTE (and it's a very important note):
+
+**This plugin ONLY SUPPORTS MONGODB (it's 1.0.0, I'm not going to add every feature in the first version, that's too much work).**
+Although I will add support for other databases.
+Check the **TODO** list for more information.
 
 ### General:
 - Fast and Asynchronous compilation and processing of code.
@@ -42,11 +47,25 @@ These are here because they were planned, but weren't made because they were har
 ### Systems:
 - GUI **banking and finance system**
 - **Interest and Taxes** system
-- **Experience and money TRADING** system
+- **Experience and money Trading** system
 - **Withdrawable and Depositable** system via items (using paper to withdraw money from your balance)
+- **Multiple database support** system
+
+
+
+**Multiple database support system** means to check the database, and if it's a certain database then use that database.
+
+let's say I'm using SQLite:
+The code checks if I'm using MongoDB, since I'm using SQLite, The check fails.
+although the check that checks if I'm using SQLite does succeed
+
+therefore the code does not run off MongoDB, it runs off SQLite.
+This SHOULD be implemented after SQLite.
+
+
 
 ### Databases:
-This is ranked from the Databases that will be made first.
+This is ranked top to bottom from the Databases that will be made first.
 - SQLite
 - MySQL
 - MariaDB
