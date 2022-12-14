@@ -62,14 +62,15 @@ The code checks if I'm using MongoDB, since I'm using SQLite, The check fails.
 although the check that checks if I'm using SQLite does succeed
 
 therefore the code does not run off MongoDB, it runs off SQLite.
-This SHOULD be implemented after SQLite.
+This SHOULD be implemented after H2.
 
 
 
 ### Databases:
 This is ranked top to bottom from the Databases that will be made first.
+- H2
 - SQLite
 - MySQL
 - MariaDB
-- H2
+- PostgreSQL
 - **OTHERS CAN BE REQUESTED OR MADE VIA PULL REQUEST.**
