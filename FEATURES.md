@@ -15,7 +15,7 @@ Check the **TODO** list for more information.
 
 ### Database:
 - MongoDB, uses **asynchronous processing and drivers**.
-- That's it, although **SQLite is the next database**.
+- That's it, although **H2 is the next database**.
 
 ### Administrative
 - Ability to give money to players.
