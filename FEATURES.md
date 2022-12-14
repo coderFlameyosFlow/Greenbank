@@ -3,7 +3,9 @@ If you want any more please make a feature list.
 PLEASE NOTE (and it's a very important note):
 
 **This plugin ONLY SUPPORTS MONGODB (it's 1.0.0, I'm not going to add every feature in the first version, that's too much work).**
+
 Although I will add support for other databases.
+
 Check the **TODO** list for more information.
 
 ### General:
