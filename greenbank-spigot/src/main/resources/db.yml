@@ -1,0 +1,59 @@
+# The only available options to
+# use as a database are only MongoDB. (if you set it to anything else then)
+# If you need other databases, please feel free to make a feature request or PR to GitHub.com.
+#
+# Minimum database versions supported:
+#   - MongoDB version v4.8
+#
+# Default used database is MongoDB (Because it's the only available database)
+# NOTE 2: This is NOT case-sensitive.
+database-type: MongoDB
+
+# MONGODB configuration
+
+
+
+
+
+# The URI of your MongoDB database.
+#
+# MongoDB is better than SQL in terms of
+# storing high amounts of data in its databases
+#
+# If you don't have a MongoDB URI but want to, and don't know how,
+# Watch this useful video:
+#
+# Only edit this if you use MongoDB.
+mongodb-connection-uri: root
+
+# MongoDB Database Name.
+#
+# This is the name of your MongoDB database.
+# This is just as important as the URI.
+#
+# Only edit this if you use MongoDB.
+mongodb-database-name: "root"
+
+# MongoDB Database Collection.
+#
+# This is the name of your MongoDB's database collection.
+# This is needed to know where it should put the data exactly.
+#
+# Only edit this if you use MongoDB.
+mongodb-database-collection: "root"
+
+# A port for MySQL, MongoDB and more.
+#
+# Default for MongoDB is 27017 while Default for MySQL is 3306
+database-port: 27017
+
+should-use-async-connection: true
+
+# File version (do NOT edit, I AM WARNING YOU!)
+#
+# This is provided entirely by the BoostedYAML
+# Implementation automatically,
+#
+# so you should NOT mess with this unless you REALLY know
+# what you are doing with this.
+file-version: 1

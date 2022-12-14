@@ -1,0 +1,59 @@
+# This file is part of the messages said on
+# this whole plugin, everything is here, and editable
+# to your very likings.
+
+# Ways to color messages:
+#   Original way, example:
+#     &cHi &r(for red) and so on.
+
+# BALANCE MESSAGES
+#
+# PLEASE USE THE PLACEHOLDERS IN THEIR MESSAGES, THE CODE ISN'T SMART ENOUGH TO
+# COMPREHEND MORE PLACEHOLDERS THAN PROVIDED IN MESSAGES.YML DEFAULT MESSAGES DOWN THERE.
+#
+# FOR EXAMPLE:
+# 1. other-player-balance: "&7%player%'s balance is: &a%balance%."
+#
+# CANNOT HANDLE:
+# 2. other-player-balance: "&7%player%'s balance is: &a%amount%."
+#
+# let's say %player% returns BobNameYes and %balance% returns 1000.
+#
+# Result of both:
+# 1. BobNameYes's balance is: 1000.
+# 2. BobNameYes's balance is: %amount%.
+#
+# Placeholders:
+#   %player% The player in these situations.
+#   %balance% The current balance of the player.
+#   %amount% The amount of balance given to/set to/removed from the player.
+#   %total% The balance of the player subtracted or added by %amount%
+player-balance: "&7Your balance is: &a%balance%"
+other-player-balance: "&7%player%'s balance is: &a%balance%."
+
+money-given-success: "&7Successfully given &a%amount% &7to %player%."
+money-paid-success: "&7Successfully paid &a%amount%&7 to %player%, your new balance is: &a%total%"
+
+received-money-success: "&7You have received &a%amount%&7 from &a%player%&7, your new balance is: &a%total%"
+given-money-success: "&7You have received &a%amount%&7, your new balance is: &a%total%"
+set-money-success: "&7Successfully set %player%'s balance to &a%amount%&7"
+player-money-set-success: "&7Your balance has been completely set to &a%amount%&7."
+removed-money-success: "&7Successfully removed &c%amount% &7from %player%."
+player-removed-money-success: "&7Deducted &a%amount% &7from you, your new balance is: &a%total%"
+reset-money-success: "&7Successfully reset %player%'s balance."
+player-reset-money-success: "&7Your balance has been completely reset."
+
+# ERROR MESSAGES
+not-enough-money: "&cYou don't have enough money."
+only-player-command: "&cOnly players are allowed to execute this command."
+player-does-not-exist: "&cThe player you are looking for does not exist."
+not-enough-permissions: "&cYou don't have enough permissions"
+
+# File version (do NOT edit, I AM WARNING YOU!)
+#
+# This is provided entirely by the BoostedYAML
+# Implementation automatically,
+#
+# so you should NOT mess with this unless you REALLY know
+# what you are doing with this.
+file-version: 1
