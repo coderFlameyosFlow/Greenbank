@@ -1,8 +1,12 @@
 package org.flameyosflow.greenbank;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Objects;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
+
+import org.bukkit.scheduler.BukkitRunnable;
 
 import org.flameyosflow.greenbank.api.config.DatabaseConfig;
 import org.flameyosflow.greenbank.api.config.MessagesConfig;
@@ -14,9 +18,6 @@ import org.flameyosflow.greenbank.economy.VaultEconomySupport;
 import org.flameyosflow.greenbank.economy.VaultLayer;
 import org.flameyosflow.greenbank.listeners.JoinListener;
 
-/*
- * Main class of this entire plugin.
- */
 public class GreenBankMain extends GreenBankSupport {
     private static GreenBankMain instance;
 
@@ -29,6 +30,7 @@ public class GreenBankMain extends GreenBankSupport {
     private YamlDocument databaseConfig;
 
     private YamlDocument messagesConfig;
+
 
     @Override
     public void onLoad() {
@@ -51,46 +53,39 @@ public class GreenBankMain extends GreenBankSupport {
 
         // if MongoDB exists in db.yml, use that.
         mongoConnect = new MongoDBDatabaseConnect(this);
-        if (!databaseConfig.getBoolean("should-use-async-connection")) {
-            mongoConnect.connect();
-            getLogger().info("Synchronous connection to MongoDB database successfully complete.");
-        } else {
-            new Thread(() -> {
+        BukkitRunnable connectDatabaseAsync = new BukkitRunnable() {
+            @Override
+            public void run() {
                 mongoConnect.connect();
-                getLogger().info("Asynchronous connection to MongoDB database successfully complete.");
-            }).start();
-        }
+            }
+        };
 
-        if (configFile.getBoolean("override-all-other-plugins")) {
-            registerCommand("balance", new BalanceCommand(this));
-            registerCommand("pay", new PayCommand(this));
-            // registerCommand("balancetop", new BalanceTopCommand());
-
-            // Economy (Admin only).
-            registerCommand("eco", new EcoCommand(this));
-
-            // Not Economy (Admin only).
-            registerCommand("greenbank", new GreenbankCommand(this));
-
-            getLogger().info("[GreenBank] GreenBank " + getVersion() + " has been successfully enabled and did override all other economy plugins!");
+        if (configFile.getBoolean("should-use-async-connection")) {
+            connectDatabaseAsync.runTaskAsynchronously(this);
         } else {
-            // Don't use registerCommand as it overrides all other commands.
-            getCommand("balance").setExecutor(new BalanceCommand(this));
-            getCommand("pay").setExecutor(new PayCommand(this));
-            // getCommand("balancetop").setExecutor(new BalanceTopCommand());
-
-            // Economy (Admin only).
-            getCommand("eco").setExecutor(new EcoCommand(this));
-
-            // Not Economy (Admin only).
-            getCommand("greenbank").setExecutor(new GreenbankCommand(this));
-
-            getLogger().info("[GreenBank] GreenBank " + getVersion() + " has been successfully enabled, ");
-            getLogger().info("Although `override-all-other-plugins` is false, ");
-            getLogger().info("GreenBank will NOT override any other economy plugins or their commands/tab completes.");
+            connectDatabaseAsync.runTask(this);
         }
+
+        getLogger().info(" ");
+        getLogger().info("Synchronous connection to MongoDB database successfully complete.");
+
+        registerCommand("balance", new BalanceCommand(this));
+        registerCommand("pay", new PayCommand(this));
+        registerCommand("eco", new EcoCommand(this));
+        registerCommand("greenbank", new GreenbankCommand(this));
 
         registerListener(new JoinListener(this), this);
+    }
+
+    @Override
+    public void onDisable() {
+        try {
+            initConfig();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        getLogger().info("[GreenBank] GreenBank has been successfully disabled!");
     }
 
     public void initConfig() throws IOException {
@@ -101,10 +96,20 @@ public class GreenBankMain extends GreenBankSupport {
         databaseConfig.reload();
         messagesConfig.reload();
         configFile.reload();
+        getLogger().info("Successfully saved and reloaded ALL configuration files.");
     }
 
     public void logError(String error) {
         getLogger().severe(() -> error);
+    }
+
+    public InputStream getConfigYaml(String fileName) {
+        try {
+            return Objects.requireNonNull(getResource(fileName));
+        } catch (NullPointerException error) {
+            error.printStackTrace();
+            return null;
+        }
     }
 
     public void fireCriticalError(String message, String error) {
@@ -137,17 +142,6 @@ public class GreenBankMain extends GreenBankSupport {
 
     private void setInstance(GreenBankMain plugin) {
         instance = plugin;
-    }
-
-    @Override
-    public void onDisable() {
-        try {
-            initConfig();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        getLogger().info("[GreenBank] GreenBank has been successfully disabled!");
     }
 
     public static GreenBankMain getPlugin() {
