@@ -1,6 +1,6 @@
 name: Greenbank
 main: org.flameyosflow.greenbank.GreenBankMain
-version: 1.0.0 BUILD 10
+version: 1.0.0 BUILD 14
 api-version: 1.13
 softdepend:
   - Vault
@@ -24,4 +24,4 @@ commands:
   greenbank:
     description: An administrative command for basic admin necessities.
     aliases: [ gb ]
-    permission: greenbank.admin.gb
+    permission: greenbank.admin.greenbank
