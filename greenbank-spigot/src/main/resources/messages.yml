@@ -56,4 +56,4 @@ not-enough-permissions: "&cYou don't have enough permissions"
 #
 # so you should NOT mess with this unless you REALLY know
 # what you are doing with this.
-file-version: 1
+file-version: 1 
