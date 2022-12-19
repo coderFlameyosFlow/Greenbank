@@ -10,7 +10,7 @@ currency-name: "Dollar"
 currency-name-plural: "Dollars"
 
 # The sign of the currency, such as dollar, euro, etc.
-Sign: "$"
+currency-sign: "$"
 
 # BALANCE SETTINGS
 
