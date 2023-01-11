@@ -1,0 +1,136 @@
+package org.flameyosflow.greenbank.database.mongodb;
+
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ServerApi;
+import com.mongodb.ServerApiVersion;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bukkit.entity.Player;
+import org.flameyosflow.greenbank.GreenBankMain;
+import org.flameyosflow.greenbank.utils.annotations.Asynchronous;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.set;
+import static org.junit.Assert.assertNotNull;
+
+
+/**
+ * The MongoDatabase connection to the MongoDB database.
+ *
+ * @author FlameyosFlow
+ */
+
+@SuppressWarnings("unchecked")
+public class MongoDBDatabaseConnect extends MongoDBConnect<MongoClient> {
+   private final GreenBankMain greenBank;
+
+    public MongoDBDatabaseConnect(GreenBankMain greenBank) {
+        this.greenBank = greenBank;
+    }
+
+    /**
+     * Connect to the MongoDB database.
+     *
+     * @return the mongo client.
+     * @author FlameyosFlow
+     * @since 1.0.0 BUILD 1
+     */
+    public MongoClient createConnection() {
+        ConnectionString connectionString = new ConnectionString(greenBank.getDatabaseConfigFile().getString("mongodb-connection-uri"));
+        return MongoClients.create(MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .serverApi(ServerApi.builder()
+                        .version(ServerApiVersion.V1)
+                        .build())
+                .build());
+    }
+
+    @Override
+    public Object getConnection() {
+        MongoDatabase mongoDatabase = createConnection().getDatabase(greenBank.getDatabaseConfigFile().getString("mongodb-database-name"));
+        return mongoDatabase.getCollection(greenBank.getDatabaseConfigFile().getString("mongodb-database-collection"));
+    }
+
+    @Override
+    public void closeConnection() {
+           createConnection().close();
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void delete(Object delete) {
+        MongoCollection<Document> collection = (MongoCollection<Document>) getConnection();
+        collection.deleteOne((Bson) delete);
+    }
+
+    @Asynchronous
+    @Override
+    public void setDocumentPlayerData(Object value, String identifier, String uuid) {
+        UpdateOptions options = new UpdateOptions().upsert(true);
+        MongoCollection<Document> collection = (MongoCollection<Document>) getConnection();
+        try {
+            CompletableFuture.runAsync(() -> collection.updateOne(eq("uuid", uuid), set(identifier, value), options), Executors.newFixedThreadPool(30)).get();
+            greenBank.getLogger().info("Completed asynchronous updating for user uuid: " + uuid);
+        } catch (final ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Asynchronous
+    @Override
+    public Object getDocumentPlayerData(String identifier, String uuid) {
+        Document document = (Document) findFirstDocument(eq("uuid", uuid));
+        assertNotNull("document was found null or not found for uuid: " + uuid + ".", document);
+
+        Document foundDocument = (Document) findFirstDocument(document);
+        assertNotNull("foundDocument was found null or not found for uuid: " + uuid + ".", foundDocument);
+        try {
+            return CompletableFuture.supplyAsync(() -> foundDocument.get(identifier)).get();
+        } catch (final ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Object findFirstDocument(Bson whatToFind) {
+        MongoCollection<Document> collection = (MongoCollection<Document>) getConnection();
+        return collection.find(whatToFind).first();
+    }
+
+    @Asynchronous
+    public void addNewPlayer(Player player) {
+        MongoCollection<Document> collection = (MongoCollection<Document>) getConnection();
+        try {
+            CompletableFuture.runAsync(() -> {
+                collection.insertOne(new Document()
+                        .append("uuid", player.getUniqueId().toString()) // Add unique identifier
+                        .append("balance", greenBank.getConfigFile().getLong("default-starting-balance")) // Add balance
+                        .append("bank-account", greenBank.getConfigFile().getLong("default-starting-balance")) // Add bank account
+                        .append("has-infinite-money", false)); /* Add the boolean value for infinite money */ }).get();
+        } catch (final Exception error) {
+            greenBank.logError("Failed to insertOne new player (balance, uuid): " + error.getMessage());
+            error.printStackTrace();
+        }
+    }
+
+    public long getBalance(@NotNull UUID uuid) {
+        return (long) getDocumentPlayerData("balance", uuid.toString());
+    }
+
+    public void setBalance(long balance, @NotNull UUID uuid) {
+        setDocumentPlayerData(balance, "balance", uuid.toString());
+    }
+}

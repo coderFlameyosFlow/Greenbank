@@ -1,0 +1,30 @@
+# This automatically overrides all other economy plugins,
+#
+# Default: true
+override-all-other-plugins: true
+
+# CURRENCY SETTINGS
+
+# The currency name, such as dollar, euro, etc.
+currency-name: "Dollar"
+currency-name-plural: "Dollars"
+
+# The sign of the currency, such as dollar, euro, etc.
+currency-sign: "$"
+
+# BALANCE SETTINGS
+
+# The starting balance where everyone receives
+# this default amount of money for every player.
+#
+# The default amount is 0 (no given amount).
+default-starting-balance: 0
+
+# File version (do NOT edit, I AM WARNING YOU!)
+#
+# This is provided entirely by the BoostedYAML
+# Implementation automatically,
+#
+# so you should NOT mess with this unless you REALLY know
+# what you are doing with this.
+file-version: 1

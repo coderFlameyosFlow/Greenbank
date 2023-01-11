@@ -1,0 +1,27 @@
+name: Greenbank
+main: org.flameyosflow.greenbank.GreenBankMain
+version: 1.0.0 build 21
+api-version: 1.13
+softdepend:
+  - Vault
+author: FlameyosFlow
+description: A lightweight yet powerful economy plugin filled with green money!
+website: https://github.com/coderFlameyosFlow/Greenbank
+
+commands:
+  balance:
+    description: Check your balance or someone else!
+    aliases: [ bal, balan ]
+    permission: greenbank.user.balance
+  pay:
+    description: Pay or give someone some money!
+    aliases: [ give, transfer ]
+    permission: greenbank.user.pay
+  eco:
+    description: An administrative command to modify player's balance!
+    aliases: [ economy, econ ]
+    permission: greenbank.admin.eco
+  greenbank:
+    description: An administrative command for basic admin necessities.
+    aliases: [ gb ]
+    permission: greenbank.admin.greenbank
