@@ -1,0 +1,102 @@
+database:
+  general-database:
+    # Uses the database of the user's choice.
+    # Available options:
+    #     MySQL, the first general database released on FlowCore.
+    #     H2, the first file-based/in-memory database released on Flowcore
+    use-database: "MySQL"
+
+    # Uses SSL or not depending on the boolean value.
+    # if you run server databases, but you are running them on localhost then you can feel free to keep this off, but if not, I suggest turning this on.
+    # if you run a serverless, file-based or in-memory database, this shouldn't matter.
+    use-ssl: false
+
+  general-sql:
+    # Set maximum pool size for the database PROVIDED BY HIKARICP
+    # We'd only change this if you know what you're doing.
+    # Default: 20
+    maximum-pool-size: 20
+
+    # Set the connection pool's name PROVIDED BY HIKARICP
+    # Default: Greenbank Connection Pool
+    pool-name: "Greenbank Connection Pool"
+
+    sql-table: "balances"
+
+  mysql:
+    password: "insert-password"
+    username: "insert-username"
+    jdbc-url: "insert-url"
+
+    advanced:
+      driver-name: "com.mysql.cj.jdbc.Driver"
+
+  H2:
+    jdbc-url: "jdbc:h2:file:plugins/Greenbank"
+    password: "insert-password"
+    username: "insert-username"
+
+    advanced:
+      driver-name: "org.h2.Driver"
+
+currency:
+  # The currency name (plural), such as dollar, euro, etc.
+  currency-name: "dollar"
+  currency-name-plural: "dollars"
+
+  # The sign of the currency, such as dollar, euro, etc.
+  currency-sign: "$"
+
+  # BALANCE SETTINGS
+
+  # The starting balance where everyone receives
+  # this default amount of money for every player.
+  #
+  # The default amount is 0 (no given amount).
+  default-starting-balance: 0
+
+  # default-starting-balance but the difference is:
+  # Instead of using /balance and stuff like that, everything is stored into a GUI based bank account, completely different
+  default-starting-bank-balance: 0
+
+  # Should the plugin be able to create an account on player's first join?
+  # This checks if the player has an account, and if not then it creates an account on join (if true).
+  #
+  # if this is "false", the plugin registers the command "/createaccount".
+  # MUST RESTART IF SET TO FALSE/TRUE WHILE SERVER IS ON.
+  # Default: true
+  create-account-on-join: true
+
+messages:
+  #   %player% The player in these situations.
+  #   %balance% The current balance of the player.
+  #   %amount% The amount of balance given to/set to/removed from the player.
+  #   %total% The balance of the player subtracted or added by %amount%
+  player-balance: "&7Your balance is: &a%balance%"
+  other-player-balance: "&7%player%'s balance is: &a%balance%."
+
+  money-given-success: "&7Successfully given &a%amount% &7to &a%player%."
+  money-paid-success: "&7Successfully paid &a%amount%&7 to %player%, your new balance is: &a%total%"
+
+  received-money-success: "&7You have received &a%amount%&7 from &a%player%&7, your new balance is: &a%total%"
+  given-money-success: "&7You have received &a%amount%&7, your new balance is: &a%total%"
+  set-money-success: "&7Successfully set %player%'s balance to &a%amount%&7"
+  player-money-set-success: "&7Your balance has been completely set to &a%amount%&7."
+  removed-money-success: "&7Successfully removed &c%amount% &7from %player%."
+  player-removed-money-success: "&7Deducted &a%amount% &7from you, your new balance is: &a%total%"
+  reset-money-success: "&7Successfully reset %player%'s balance."
+  player-reset-money-success: "&7Your balance has been completely reset."
+
+  # ERROR MESSAGES
+  not-enough-money: "&cYou don't have enough money."
+  only-player-command: "&cOnly players are allowed to execute this command."
+  player-does-not-exist: "&cThe player you are looking for does not exist."
+  not-enough-permissions: "&cYou don't have enough permissions"
+
+# File version, DO NOT EDIT.
+#
+# This is provided entirely by the BoostedYAML implementation automatically,
+#
+# so you should NOT mess with this unless you REALLY know
+# what you are doing with this. (or a trusted developer tells you to change this)
+file-version: 2

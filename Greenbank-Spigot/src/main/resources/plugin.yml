@@ -1,0 +1,8 @@
+name: Greenbank
+version: '${project.version}'
+main: com.greenbank.spigot.Greenbank
+api-version: 1.13
+authors: [ FlameyosFlow ]
+description: A new and optimized economy plugin for minecraft servers
+depend:
+  - Vault
